@@ -16,8 +16,10 @@ app.add_middleware(
 )
 
 # Load your trained model (adjust path/name to whatever you saved)
-model = joblib.load("best_xgboost.pkl")
-scaler = joblib.load("scaler.pkl")
+MODEL_PATH = Path("./best_xgboost.pkl")
+SCALER_PATH = Path("./scaler.pkl")
+model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
 
 # Code -> fault mapping, in the SAME order as the frontend expects:
 # 0 = Healthy, 1 = TWF, 2 = HDF, 3 = PWF, 4 = OSF, 5 = RNF
@@ -32,6 +34,11 @@ class MachineInput(BaseModel):
     torque: float
     tool_wear: float
 
+@app.get("/")
+def home():
+    return {
+        "message": "Smart Predictive Maintenance API is running"
+    }
 
 @app.post("/predict")
 def predict(data: MachineInput):
