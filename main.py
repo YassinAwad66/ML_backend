@@ -16,10 +16,8 @@ app.add_middleware(
 )
 
 # Load your trained model (adjust path/name to whatever you saved)
-MODEL_PATH = Path("../../modelS/best_xgboost.pkl")
-SCALER_PATH = Path("../../modelS/scaler.pkl")
-model = joblib.load(MODEL_PATH)
-scaler = joblib.load(SCALER_PATH)
+model = joblib.load("best_xgboost.pkl")
+scaler = joblib.load("scaler.pkl")
 
 # Code -> fault mapping, in the SAME order as the frontend expects:
 # 0 = Healthy, 1 = TWF, 2 = HDF, 3 = PWF, 4 = OSF, 5 = RNF
